@@ -5,7 +5,7 @@ import com.cgi.table4u.model.Zone;
 
 import java.util.UUID;
 
-public record TableResponse(
+public record TableRecommendationResponse(
         UUID id,
         int tableNumber,
         int capacity,
@@ -14,9 +14,17 @@ public record TableResponse(
         int positionY,
         boolean windowSeat,
         boolean privateArea,
-        boolean childFriendly
+        boolean childFriendly,
+        String status,
+        int score,
+        boolean bestMatch
 ) {
-    public TableResponse(RestaurantTable table) {
+    public TableRecommendationResponse(
+            RestaurantTable table,
+            String status,
+            int score,
+            boolean bestMatch
+    ) {
         this(
                 table.getId(),
                 table.getTableNumber(),
@@ -26,7 +34,10 @@ public record TableResponse(
                 table.getPositionY(),
                 table.isWindowSeat(),
                 table.isPrivateArea(),
-                table.isChildFriendly()
+                table.isChildFriendly(),
+                status,
+                score,
+                bestMatch
         );
     }
 }

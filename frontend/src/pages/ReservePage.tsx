@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import ReservationForm from '../components/ReservationForm';
 import FloorPlan from '../components/FloorPlan';
-import { fetchTables } from '../services/api';
+import { fetchRecommendedTables } from '../services/api';
 import type { ReservationSearch, Table } from '../types';
 import '../style/ReservePage.css';
 
@@ -11,8 +11,7 @@ function ReservePage() {
     const floorPlanRef = useRef<HTMLDivElement>(null);
 
     function handleSearch(search: ReservationSearch) {
-        console.log('Search:', search);
-        fetchTables()
+        fetchRecommendedTables(search)
             .then((data) => {
                 setTables(data);
                 setSearched(true);

@@ -47,9 +47,10 @@
   border-radius: 50%;
 }
 
-.legend-terrace::before { background: var(--color-zone-terrace); box-shadow: 0 0 6px rgba(90, 158, 120, 0.4); }
-.legend-indoor::before  { background: var(--color-zone-indoor);  box-shadow: 0 0 6px rgba(196, 154, 108, 0.4); }
-.legend-private::before { background: var(--color-zone-private); box-shadow: 0 0 6px rgba(168, 93, 106, 0.4); }
+.legend-recommended::before { background: var(--color-recommended); box-shadow: 0 0 8px rgba(184, 149, 106, 0.6); }
+.legend-available::before { background: var(--color-available); box-shadow: 0 0 6px rgba(74, 124, 89, 0.5); }
+.legend-occupied::before  { background: var(--color-occupied);  box-shadow: 0 0 6px rgba(139, 58, 58, 0.5); }
+.legend-filtered::before { background: var(--color-filtered); }
 
 
 /* FLOOR PLAN CONTAINER: architectural */

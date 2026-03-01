@@ -55,9 +55,10 @@ function FloorPlan({ tables }: Props) {
             <div className="floorplan-header">
                 <h2>Restaurant Floor Plan</h2>
                 <div className="floorplan-legend">
-                    <span className="legend-item legend-terrace">Terrace</span>
-                    <span className="legend-item legend-indoor">Indoor</span>
-                    <span className="legend-item legend-private">Private</span>
+                    <span className="legend-item legend-recommended">Recommended</span>
+                    <span className="legend-item legend-available">Available</span>
+                    <span className="legend-item legend-occupied">Occupied</span>
+                    <span className="legend-item legend-filtered">Filtered Out</span>
                 </div>
             </div>
 

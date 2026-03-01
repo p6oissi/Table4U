@@ -18,4 +18,7 @@ export interface Table {
     windowSeat: boolean
     privateArea: boolean
     childFriendly: boolean
+    status?: 'AVAILABLE' | 'OCCUPIED' | 'FILTERED_OUT'
+    score?: number
+    bestMatch?: boolean
 }
