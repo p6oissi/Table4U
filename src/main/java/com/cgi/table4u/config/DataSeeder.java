@@ -7,6 +7,7 @@ import com.cgi.table4u.repository.ReservationRepository;
 import com.cgi.table4u.repository.TableRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,6 +27,7 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         List<RestaurantTable> tables = seedTables();
         seedRandomReservations(tables);
@@ -49,10 +51,11 @@ public class DataSeeder implements CommandLineRunner {
                 new RestaurantTable(11, 4, Zone.INDOOR, 2, 2, false, false, false),
                 new RestaurantTable(12, 2, Zone.INDOOR, 3, 2, true, false, false),
 
-                // Private room 13-15
-                new RestaurantTable(13, 4, Zone.PRIVATE_ROOM, 4, 1, false, true, false),
-                new RestaurantTable(14, 6, Zone.PRIVATE_ROOM, 4, 2, false, true, false),
-                new RestaurantTable(15, 8, Zone.PRIVATE_ROOM, 4, 3, false, true, false)
+                // Private room 13-16
+                new RestaurantTable(13, 4, Zone.PRIVATE_ROOM, 4, 1, true, true, false),
+                new RestaurantTable(14, 6, Zone.PRIVATE_ROOM, 4, 2, true, true, false),
+                new RestaurantTable(15, 8, Zone.PRIVATE_ROOM, 4, 3, true, true, false),
+                new RestaurantTable(16, 10, Zone.PRIVATE_ROOM, 4, 4, true, true, false)
         );
         return tableRepository.saveAll(tables);
     }

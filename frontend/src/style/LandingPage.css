@@ -1,26 +1,80 @@
 .landing {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-    color: var(--color-white);
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle radial glow behind content */
+.landing::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-gold-glow) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .landing-content {
-    max-width: 600px;
-    padding: var(--spacing-lg);
+  text-align: center;
+  max-width: 560px;
+  padding: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+/* Decorative gold lines flanking the title */
+.landing-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.landing-ornament .gold-line {
+  width: 64px;
 }
 
 .landing-content h1 {
-    font-size: 3rem;
-    margin-bottom: var(--spacing-md);
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+  line-height: 1.1;
 }
 
-.landing-content p {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-lg);
-    opacity: 0.9;
-    line-height: 1.6;
+.landing-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--color-gold);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--spacing-lg);
+}
+
+.landing-description {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-xl);
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Thin horizontal rule */
+.landing-divider {
+  width: 1px;
+  height: 48px;
+  background: var(--color-surface-border);
+  margin: 0 auto var(--spacing-lg);
 }

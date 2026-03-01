@@ -1,7 +1,8 @@
 package com.cgi.table4u.controller;
 
-import com.cgi.table4u.model.RestaurantTable;
-import com.cgi.table4u.repository.TableRepository;
+import com.cgi.table4u.dto.TableResponse;
+import com.cgi.table4u.model.Zone;
+import com.cgi.table4u.service.TableService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,14 +13,20 @@ import java.util.List;
 @RequestMapping("/api/tables")
 public class TableController {
 
-    private final TableRepository tableRepository;
+    private final TableService tableService;
 
-    public TableController(TableRepository tableRepository) {
-        this.tableRepository = tableRepository;
+    public TableController(TableService tableService) {
+        this.tableService = tableService;
     }
 
     @GetMapping
-    public List<RestaurantTable> getAllTables(){
-        return tableRepository.findAll();
+    public List<TableResponse> getAllTables(){
+        return tableService.getAllTables();
     }
+
+    @GetMapping("/zones")
+    public Zone[] getZones(){
+        return Zone.values();
+    }
+
 }

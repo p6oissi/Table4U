@@ -1,0 +1,142 @@
+/* TABLE ELEMENT: architectural top-down */
+.table-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-surface-border);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  font-family: inherit;
+  box-shadow:
+    inset 0 1px 4px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Sizes by capacity */
+.table-sm {
+  width: 56px;
+  height: 56px;
+}
+
+.table-md {
+  width: 72px;
+  height: 72px;
+}
+
+.table-lg {
+  width: 90px;
+  height: 90px;
+}
+
+.table-xl {
+  width: 110px;
+  height: 74px;
+  border-radius: 37px;
+}
+
+/* Outer ring on hover */
+.table-element::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.table-element:hover {
+  transform: scale(1.12);
+  border-color: var(--color-gold);
+  box-shadow:
+    inset 0 1px 4px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(184, 149, 106, 0.18),
+    0 0 8px rgba(184, 149, 106, 0.1);
+}
+
+.table-element:hover::after {
+  border-color: rgba(184, 149, 106, 0.3);
+}
+
+/* Typography */
+.table-number {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.table-sm .table-number { font-size: 0.85rem; }
+.table-xl .table-number { font-size: 1.1rem; }
+
+.table-seats {
+  font-family: var(--font-body);
+  font-size: 0.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-faint);
+  margin-top: 2px;
+}
+
+.table-sm .table-seats { font-size: 0.45rem; margin-top: 1px; }
+
+
+/* ZONE COLORS: bright & distinct */
+
+/* Terrace: lively green */
+.zone-terrace {
+  border-color: var(--color-zone-terrace);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(90, 158, 120, 0.2) 0%, transparent 70%),
+    var(--color-surface);
+}
+
+.zone-terrace .table-number { color: #8fcaa8; }
+
+.zone-terrace:hover {
+  border-color: var(--color-gold);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(90, 158, 120, 0.28) 0%, transparent 70%),
+    var(--color-surface);
+}
+
+/* Indoor: warm amber */
+.zone-indoor {
+  border-color: var(--color-zone-indoor);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(196, 154, 108, 0.15) 0%, transparent 70%),
+    var(--color-surface);
+}
+
+.zone-indoor .table-number { color: #dab68e; }
+
+.zone-indoor:hover {
+  border-color: var(--color-gold);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(196, 154, 108, 0.22) 0%, transparent 70%),
+    var(--color-surface);
+}
+
+/* Private Room: rich wine */
+.zone-private-room {
+  border-color: var(--color-zone-private);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(168, 93, 106, 0.2) 0%, transparent 70%),
+    var(--color-surface);
+}
+
+.zone-private-room .table-number { color: #d08a96; }
+
+.zone-private-room:hover {
+  border-color: var(--color-gold);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(168, 93, 106, 0.28) 0%, transparent 70%),
+    var(--color-surface);
+}

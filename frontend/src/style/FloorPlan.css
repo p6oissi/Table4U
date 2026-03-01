@@ -1,0 +1,498 @@
+.floorplan-wrapper {
+  background: var(--color-surface);
+  border: 1px solid var(--color-surface-border);
+  padding: var(--spacing-lg);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+  scroll-margin-top: var(--spacing-lg);
+}
+
+/* Header */
+.floorplan-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-surface-border);
+}
+
+.floorplan-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+}
+
+.floorplan-legend {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.legend-item {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-item::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-terrace::before { background: var(--color-zone-terrace); box-shadow: 0 0 6px rgba(90, 158, 120, 0.4); }
+.legend-indoor::before  { background: var(--color-zone-indoor);  box-shadow: 0 0 6px rgba(196, 154, 108, 0.4); }
+.legend-private::before { background: var(--color-zone-private); box-shadow: 0 0 6px rgba(168, 93, 106, 0.4); }
+
+
+/* FLOOR PLAN CONTAINER: architectural */
+
+.fp-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* Shared absolute slot for tables */
+.fp-table-slot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+
+/* Terrace outside, dashed border */
+.fp-terrace {
+  position: relative;
+  height: 150px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 20px,
+      rgba(90, 158, 120, 0.03) 20px,
+      rgba(90, 158, 120, 0.03) 40px
+    ),
+    var(--color-floor-terrace);
+  border: 2px dashed var(--color-wall-thin);
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+
+/* Main Building, thick outer walls */
+.fp-building {
+  display: flex;
+  border: 3px solid var(--color-wall);
+  position: relative;
+  min-height: 380px;
+}
+
+
+/* Private Rooms, enclosed rooms on sides */
+.fp-room {
+  position: relative;
+  width: 160px;
+  min-height: 100%;
+  background: var(--color-floor-private);
+  flex-shrink: 0;
+}
+
+.fp-room-left {
+  border-right: 3px solid var(--color-wall);
+}
+
+.fp-room-right {
+  border-left: 3px solid var(--color-wall);
+}
+
+/* Door gap, a break in the wall */
+.fp-door {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 48px;
+  background: var(--color-floor);
+  z-index: 3;
+}
+
+/* Door hinge arc */
+.fp-door::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 1px dashed var(--color-wall-thin);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.fp-door-right {
+  right: -4px;
+}
+
+.fp-door-right::after {
+  right: 2px;
+  top: -14px;
+  clip-path: inset(50% 0 0 50%);
+}
+
+.fp-door-left {
+  left: -4px;
+}
+
+.fp-door-left::after {
+  left: 2px;
+  top: -14px;
+  clip-path: inset(50% 50% 0 0);
+}
+
+/* Room label */
+.fp-room-tag {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-zone-private);
+  opacity: 0.7;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+
+/* Glass Wall, full-width curtain wall between hall and terrace */
+.fp-glass-wall {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(140, 180, 220, 0.45);
+  z-index: 4;
+  box-shadow:
+    0 0 8px rgba(140, 180, 220, 0.15),
+    0 2px 12px rgba(140, 180, 220, 0.06);
+}
+
+/* Vertical pane dividers across the glass wall */
+.fp-glass-wall::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 19%,
+    rgba(140, 180, 220, 0.25) 19%,
+    rgba(140, 180, 220, 0.25) 19.5%,
+    transparent 19.5%,
+    transparent 20%
+  );
+}
+
+/* Terrace door, gap in the glass wall */
+.fp-terrace-door {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: 64px;
+  height: 100%;
+  background: var(--color-floor-terrace);
+  z-index: 1;
+}
+
+.fp-terrace-door::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  border: 1px dashed var(--color-wall-thin);
+  border-radius: 0 0 24px 24px;
+  border-top: none;
+  opacity: 0.5;
+}
+
+
+/* Hall Entrance, door gap at the bottom wall of the building */
+.fp-hall-entrance {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 6px;
+  background: var(--color-floor);
+  z-index: 4;
+}
+
+/* Door swing arc inside the hall */
+.fp-hall-entrance::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  border: 1px dashed var(--color-wall-thin);
+  border-radius: 24px 24px 0 0;
+  border-bottom: none;
+  opacity: 0.5;
+}
+
+
+/* Windows, architectural glass marks on outer walls */
+.fp-window {
+  position: absolute;
+  height: 30px;
+  width: 5px;
+  z-index: 5;
+}
+
+.fp-room-left .fp-window {
+  left: 0;
+  border-left: 2px solid rgba(140, 180, 220, 0.45);
+  background: linear-gradient(90deg, rgba(140, 180, 220, 0.12), transparent);
+}
+
+.fp-room-right .fp-window {
+  right: 0;
+  border-right: 2px solid rgba(140, 180, 220, 0.45);
+  background: linear-gradient(270deg, rgba(140, 180, 220, 0.12), transparent);
+}
+
+/* Pane divider line */
+.fp-window::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(140, 180, 220, 0.25);
+}
+
+.fp-window-1 { top: 22%; }
+.fp-window-2 { top: 62%; }
+
+
+/* Main Hall, center area */
+.fp-hall {
+  flex: 1;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(196, 154, 108, 0.03) 0%, transparent 70%),
+    var(--color-floor);
+  min-height: 380px;
+}
+
+
+/* Zone tags, floating labels */
+.fp-zone-tag {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.6;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.fp-tag-terrace {
+  top: 8px;
+  left: 12px;
+  color: var(--color-zone-terrace);
+}
+
+.fp-tag-indoor {
+  top: 8px;
+  left: 12px;
+  color: var(--color-zone-indoor);
+}
+
+
+/* Kids Area, bottom-left of main hall */
+.fp-kids-area {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px dashed var(--color-wall-thin);
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.fp-kids-icon {
+  font-size: 0.55rem;
+  color: var(--color-zone-indoor);
+  opacity: 0.7;
+}
+
+.fp-kids-text {
+  font-family: var(--font-body);
+  font-size: 0.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text-faint);
+}
+
+
+/* Bottom Bar, Entrance + WC  */
+.fp-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 3px solid var(--color-wall);
+  border-top: none;
+  height: 50px;
+  background: var(--color-floor);
+  position: relative;
+}
+
+/* WC */
+.fp-wc {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px;
+}
+
+.fp-wc-icon {
+  font-size: 0.7rem;
+  color: var(--color-text-faint);
+}
+
+.fp-wc-text {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text-faint);
+}
+
+/* Entrance, gap in the bottom wall */
+.fp-entrance {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: var(--color-floor);
+  z-index: 4;
+}
+
+.fp-entrance-text {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 0.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+
+/* Entrance arrows */
+.fp-entrance::before,
+.fp-entrance::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid var(--color-text-faint);
+  border-bottom: 1px solid var(--color-text-faint);
+  transform: rotate(45deg);
+  opacity: 0.5;
+}
+
+.fp-entrance::before { left: 10px; }
+.fp-entrance::after  { right: 10px; }
+
+
+/* MOBILE LIST VIEW, hidden on desktop */
+
+.fp-mobile-view {
+  display: none;
+}
+
+
+/* RESPONSIVE, collapse to list at 700px */
+
+@media (max-width: 700px) {
+  .floorplan-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .fp-container {
+    display: none;
+  }
+
+  .fp-mobile-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .fp-mobile-zone {
+    border-left: 3px solid;
+    padding: var(--spacing-md);
+    background: var(--color-surface-raised);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
+
+  .fp-mobile-terrace { border-color: var(--color-zone-terrace); }
+  .fp-mobile-indoor  { border-color: var(--color-zone-indoor); }
+  .fp-mobile-private { border-color: var(--color-zone-private); }
+
+  .fp-mobile-zone h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .fp-mobile-terrace h3 { color: var(--color-zone-terrace); }
+  .fp-mobile-indoor h3  { color: var(--color-zone-indoor); }
+  .fp-mobile-private h3 { color: var(--color-zone-private); }
+
+  .fp-mobile-tables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+}
