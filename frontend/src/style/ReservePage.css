@@ -1,0 +1,10 @@
+.reserve {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.reserve h1 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary-dark);
+}
