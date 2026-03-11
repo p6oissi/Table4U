@@ -1,0 +1,251 @@
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 11, 9, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+  animation: backdropIn 0.25s ease forwards;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.dialog-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-surface-border);
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  animation: cardIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow:
+    0 0 0 1px rgba(184, 149, 106, 0.06),
+    0 24px 64px rgba(0, 0, 0, 0.6),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* HEADER */
+
+.dialog-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.dialog-header-ornament {
+  width: 40px;
+  height: 1px;
+  background: var(--color-gold);
+  margin: 0 auto 1rem;
+  opacity: 0.7;
+}
+
+.dialog-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.4rem;
+}
+
+.dialog-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+
+.dialog-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+
+/* SUMMARY */
+
+.dialog-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 1.5rem;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  padding: 1rem 1.25rem;
+}
+
+.dialog-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.summary-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.summary-value {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: 0.03em;
+}
+
+
+/* DIVIDER */
+
+.dialog-divider {
+  height: 1px;
+  background: var(--color-surface-border);
+  margin-bottom: 1.5rem;
+}
+
+
+/* FORM */
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dialog-field label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.dialog-field input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-surface-border);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  padding: 0.5rem 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.dialog-field input::placeholder {
+  color: var(--color-text-faint);
+  font-style: italic;
+}
+
+.dialog-field input:focus {
+  border-bottom-color: var(--color-gold);
+}
+
+.dialog-field input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dialog-error {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: #b85a5a;
+  letter-spacing: 0.02em;
+  padding-top: 0.25rem;
+}
+
+
+/* ACTIONS */
+
+.dialog-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.dialog-btn-cancel {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-surface-border);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dialog-btn-cancel:hover:not(:disabled) {
+  border-color: var(--color-text-muted);
+  color: var(--color-text);
+}
+
+.dialog-btn-cancel:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dialog-btn-confirm {
+  flex: 2;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-gold);
+  border: 1px solid var(--color-gold);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dialog-btn-confirm:hover:not(:disabled) {
+  background: #cba880;
+  border-color: #cba880;
+}
+
+.dialog-btn-confirm:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

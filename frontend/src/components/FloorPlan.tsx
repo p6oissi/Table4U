@@ -5,6 +5,7 @@ import '../style/FloorPlan.css';
 
 interface Props {
     tables: Table[];
+    onTableClick: (table: Table) => void;
 }
 
 /* Predefined positions (%) for tables within each zone area —
@@ -32,7 +33,7 @@ const PRIVATE_SLOTS = [
     { left: '50%', top: '75%' },
 ];
 
-function FloorPlan({ tables }: Props) {
+function FloorPlan({ tables, onTableClick }: Props) {
     const { terrace, indoor, privateLeft, privateRight } = useMemo(() => {
         const terrace = tables.filter(t => t.zone === 'TERRACE');
         const indoor = tables.filter(t => t.zone === 'INDOOR');
@@ -45,10 +46,6 @@ function FloorPlan({ tables }: Props) {
             privateRight: priv.slice(mid),
         };
     }, [tables]);
-
-    function handleTableClick(table: Table) {
-        console.log('Clicked table:', table);
-    }
 
     return (
         <div className="floorplan-wrapper">
@@ -69,7 +66,7 @@ function FloorPlan({ tables }: Props) {
                     <span className="fp-zone-tag fp-tag-terrace">Terrace</span>
                     {terrace.map((table, i) => (
                         <div key={table.id} className="fp-table-slot" style={TERRACE_SLOTS[i]}>
-                            <TableElement table={table} onClick={handleTableClick} />
+                            <TableElement table={table} onClick={onTableClick} />
                         </div>
                     ))}
                 </div>
@@ -84,7 +81,7 @@ function FloorPlan({ tables }: Props) {
                         <div className="fp-window fp-window-2" />
                         {privateLeft.map((table, i) => (
                             <div key={table.id} className="fp-table-slot" style={PRIVATE_SLOTS[i]}>
-                                <TableElement table={table} onClick={handleTableClick} />
+                                <TableElement table={table} onClick={onTableClick} />
                             </div>
                         ))}
                     </div>
@@ -98,7 +95,7 @@ function FloorPlan({ tables }: Props) {
                         <div className="fp-hall-entrance" />
                         {indoor.map((table, i) => (
                             <div key={table.id} className="fp-table-slot" style={INDOOR_SLOTS[i]}>
-                                <TableElement table={table} onClick={handleTableClick} />
+                                <TableElement table={table} onClick={onTableClick} />
                             </div>
                         ))}
                         <div className="fp-kids-area">
@@ -115,7 +112,7 @@ function FloorPlan({ tables }: Props) {
                         <div className="fp-window fp-window-2" />
                         {privateRight.map((table, i) => (
                             <div key={table.id} className="fp-table-slot" style={PRIVATE_SLOTS[i]}>
-                                <TableElement table={table} onClick={handleTableClick} />
+                                <TableElement table={table} onClick={onTableClick} />
                             </div>
                         ))}
                     </div>
@@ -144,7 +141,7 @@ function FloorPlan({ tables }: Props) {
                         <h3>Terrace</h3>
                         <div className="fp-mobile-tables">
                             {terrace.map(table => (
-                                <TableElement key={table.id} table={table} onClick={handleTableClick} />
+                                <TableElement key={table.id} table={table} onClick={onTableClick} />
                             ))}
                         </div>
                     </div>
@@ -154,7 +151,7 @@ function FloorPlan({ tables }: Props) {
                         <h3>Main Hall</h3>
                         <div className="fp-mobile-tables">
                             {indoor.map(table => (
-                                <TableElement key={table.id} table={table} onClick={handleTableClick} />
+                                <TableElement key={table.id} table={table} onClick={onTableClick} />
                             ))}
                         </div>
                     </div>
@@ -164,7 +161,7 @@ function FloorPlan({ tables }: Props) {
                         <h3>Private Rooms</h3>
                         <div className="fp-mobile-tables">
                             {[...privateLeft, ...privateRight].map(table => (
-                                <TableElement key={table.id} table={table} onClick={handleTableClick} />
+                                <TableElement key={table.id} table={table} onClick={onTableClick} />
                             ))}
                         </div>
                     </div>

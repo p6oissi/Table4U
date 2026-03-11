@@ -8,6 +8,19 @@ export interface ReservationSearch {
     childFriendly: boolean
 }
 
+export interface ReservationResponse {
+    id: string
+    tableId: string
+    tableNumber: number
+    zone: string
+    customerName: string
+    customerEmail: string
+    date: string
+    startTime: string
+    endTime: string
+    partySize: number
+}
+
 export interface Table {
     id: string
     tableNumber: number
