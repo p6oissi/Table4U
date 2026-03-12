@@ -1,0 +1,16 @@
+services:
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"   # Web UI: open http://localhost:8025 to read emails
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"   # Application: open http://localhost:8080
+    environment:
+      - SPRING_MAIL_HOST=mailpit
+      - SPRING_MAIL_PORT=1025
+    depends_on:
+      - mailpit
