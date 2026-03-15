@@ -18,6 +18,12 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
+    /**
+     * Saadab kliendile e-kirja broneeringu kinnitusega.
+     * E-kiri sisaldab laua numbrit, tsooni, kuupäeva, kellaaega ja seltskonna suurust.
+     *
+     * @param reservation salvestatud broneeringu andmed
+     */
     public void sendBookingConfirmation(ReservationResponse reservation) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@table4u.com");

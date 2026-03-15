@@ -26,6 +26,15 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
+    /**
+     * Broneerib laua vastavalt kliendi soovile.
+     * Kontrollib, et laud oleks olemas, mahutaks seltskonna ja poleks valitud ajal juba broneeritud.
+     * Broneering kestab alati 2 tundi alates algusajast.
+     *
+     * @param request broneeringu andmed (laua ID, kuupäev, kellaaeg, seltskonna suurus, kliendi andmed)
+     * @return broneeringu andmed
+     * @throws BookingException kui laud puudub, seltskond ei mahu lauda või valitud aeg on hõivatud
+     */
     public ReservationResponse book(ReservationRequest request) {
         RestaurantTable table = tableRepository.findById(request.tableId())
                 .orElseThrow(() -> new BookingException("Table not found."));

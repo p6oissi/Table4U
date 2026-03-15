@@ -12,6 +12,16 @@ import java.util.UUID;
 
 public interface ReservationRepository extends JpaRepository<Reservation, UUID> {
 
+    /**
+     * Tagastab kõigi laudade ID-d, mis on antud kuupäeval ja ajavahemikus hõivatud.
+     * Kaks ajavahemikku kattuvad, kui esimene algab enne teise lõppu JA lõpeb pärast teise algust.
+     * Välistab nii täieliku kui ka osalise kattumise.
+     *
+     * @param date       broneeringu kuupäev
+     * @param startTime  soovitud algusaeg
+     * @param endTime    soovitud lõpuaeg (tavaliselt algusaeg + 2 tundi)
+     * @return hõivatud laudade ID-de list
+     */
     @Query("SELECT r.table.id " +
             "FROM Reservation r " +
             "WHERE r.date = :date " +
